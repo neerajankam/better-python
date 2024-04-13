@@ -8,6 +8,19 @@ print(dis.dis("{}"))
 #              4 RETURN_VALUE            None
 print("--------------")
 print(dis.dis("dict()"))
+import timeit
+
+# Time required to create an empty dictionary using {}
+time_literal = timeit.timeit("{}", number=1000000)
+
+# Time required to create an empty dictionary using dict()
+time_function = timeit.timeit("dict()", number=1000000)
+
+print("Time using {}: ", time_literal)
+print("Time using dict(): ", time_function)
+
+# Time using {}:  0.03013368800020544(50% faster)
+# Time using dict():  0.045174241000495385
 # Bytecode
 #  0           0 RESUME                   0
 #
@@ -36,16 +49,3 @@ print(dis.dis("dict()"))
 # CALL(argc)
 # CALL pops all arguments and the callable object off the stack, calls the callable object with those arguments,
 # and pushes the return value returned by the callable object.
-import timeit
-
-# Time required to create an empty dictionary using {}
-time_literal = timeit.timeit("{}", number=1000000)
-
-# Time required to create an empty dictionary using dict()
-time_function = timeit.timeit("dict()", number=1000000)
-
-print("Time using {}: ", time_literal)
-print("Time using dict(): ", time_function)
-
-# Time using {}:  0.03013368800020544(50% faster)
-# Time using dict():  0.045174241000495385
